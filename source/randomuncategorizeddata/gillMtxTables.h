@@ -1,0 +1,10 @@
+int gillTorsoMtxidxTable[] = {1, 2, 13, 14, 15, 3, 4, 28, 29, 30};
+int gillHandLMtxidxTable[] = {16, 26, 27, 15, 0, 0, 0, 0, 0, 0};
+int gillHandLfingersMtxidxTable[] = {16, 20, 21, 22, 17, 18, 19, 23, 24, 25};
+int gillHandRMtxidxTable[] = {31, 41, 42, 30, 0, 0, 0, 0, 0, 0};
+int gillHandRfingersMtxidxTable[] = {31, 35, 36, 37, 32, 33, 34, 38, 39, 40};
+int gillPantsMtxidxTable[] = {9, 10, 5, 6, 43, 0, 0, 0, 0, 0, 0};
+int gillPresocksMtxidxTable[] = {10, 6, 0, 0, 0, 0, 0, 0, 0, 0};
+int gillSocksMtxidxTable[] = {10, 11, 12, 6, 7, 8, 0, 0, 0, 0};
+int gillShirtMtxidxTable[] = {43, 1, 2, 13, 14, 28, 29, 43, 5, 9};
+int gillBrowMtxidxTable[] = {47, 48, 49, 44, 45, 46, 0, 0, 0, 0};

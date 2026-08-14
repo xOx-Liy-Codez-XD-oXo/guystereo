@@ -1,0 +1,5 @@
+mkdir guystereo
+cp guy*.dol guystereo/boot.dol
+cp meta.xml guystereo/meta.xml
+cp source/guydat.bin guystereo/guydat.bin
+cp icon.png guystereo/icon.png

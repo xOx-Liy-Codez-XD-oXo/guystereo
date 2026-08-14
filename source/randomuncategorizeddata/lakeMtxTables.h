@@ -1,0 +1,14 @@
+int lakeBrowMtxidxTable[] = {50, 51, 52, 53, 54, 55};
+int lakePupilMtxidxTable[] = {45, 46, 48, 49};
+int lakeEarMtxidxTable[] = {56, 57};
+int lakeTorsoMtxidxTable[] = {1, 2, 5, 3, 4, 28};
+int lakeHandLMtxidxTable[] = {7, 8, 9, 10};
+int lakeHandRMtxidxTable[] = {30, 31, 32, 33};
+int lakeHandLFingersMtxidxTable[] = {8, 14, 15, 16, 17, 18, 19, 11, 12, 13};
+int lakeHandRFingersMtxidxTable[] = {31, 37, 38, 39, 34, 35, 36, 40, 41, 42};
+int lakeShirtTopMtxidxTable[] = {58, 1, 2, 5, 6, 7, 28, 29, 30};
+int lakeShirtBottomMtxidxTable[] = {58, 1, 20, 24};
+int lakePantMtxidxTable[] =  {58, 20, 21, 24, 25};
+int lakeShoeMtxidxTable[] =  {21, 25, 22, 23, 26, 27};
+int lakeShoelaceMtxidxTable[] = {21, 25};
+int lakeSockMtxidxTable[] = {21, 25};

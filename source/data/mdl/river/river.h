@@ -1,0 +1,22 @@
+#ifndef RIVER_ALL_H
+#define RIVER_ALL_H
+#include "riverEyeCluster_liym3q.h"
+#include "riverEyeClusterHappy_liym3q.h"
+#include "riverHair_liym3q.h"
+#include "riverHead_liym3q.h"
+#include "riverPants_liym3q.h"
+#include "riverShirt_liym3q.h"
+#include "riverShirtCovered_liym3q.h"
+#include "riverJacket_liym3q.h"
+#include "riverShoes_liym3q.h"
+#include "riverSkinArms_liym3q.h"
+#include "riverSkinHandL_liym3q.h"
+#include "riverSkinHandR_liym3q.h"
+#include "riverSkinLegs_liym3q.h"
+#include "riverSkinTorso_liym3q.h"
+#include "riverMouthBasis_liym3q.h"
+#include "riverMouthClose_liym3q.h"
+#include "riverMouthSmile_liym3q.h"
+#include "riverMouthWide_liym3q.h"
+#include "riverMouthTeethopen_liym3q.h"
+#endif

@@ -1,0 +1,8 @@
+echo "<?xml version="1.0" encoding="UTF-8" standalone="yes"?>"
+echo "<app>"
+echo "	<name>guy</name>"
+echo "	<short_description>Prerelease</short_description>"
+echo "	<long_description>Build date"
+date
+echo "	</long_description>"
+echo "</app>"
