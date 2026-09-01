@@ -21,6 +21,9 @@ void DK1IMU_vec_to_vecf(s32 * svec, float * vecf);
 
 s32 dk1imu_devicehandle;
 usb_devdesc dk1imu_devicedescriptor;
+int dk1imu_headsettype; //0 = dk1, 1 = dk2
+#define DK1IMU_HEADSETTYPE_DK1 0
+#define DK1IMU_HEADSETTYPE_DK2 1
 
 s16 swap_s16(s16 val) 
 {
@@ -37,13 +40,15 @@ int DK1IMU_Open(void) {
 
 	//only one interface, only 1 device
 	for(int d = 0; d < devcnt; d++) {
-		if(devicelist[d].vid != 0x2833 || devicelist[d].pid != 0x0001) //rift dk1
-			continue;
+		if(devicelist[d].vid != 0x2833) continue; //oculus vendor
+		if(devicelist[d].pid != 0x0001 && devicelist[d].pid != 0x0002) continue; //dk1, dk2
 
-		if (USB_OpenDevice(devicelist[d].device_id, 0x2833, 0x0001, &(dk1imu_devicehandle)) < 0) { //rift dk1
+		if (USB_OpenDevice(devicelist[d].device_id, 0x2833, devicelist[d].pid, &(dk1imu_devicehandle)) < 0) {
 			//printf("Couldn't open device %d\n", d);
 			return -2;
 		}
+	
+		dk1imu_headsettype = devicelist[d].pid - 1;
 
 		USB_GetDescriptors(dk1imu_devicehandle, &(dk1imu_devicedescriptor));
 		USB_SetConfiguration(dk1imu_devicehandle, dk1imu_devicedescriptor.configurations[0].bConfigurationValue);
@@ -78,14 +83,26 @@ int DK1IMU_Dataplease(void * buffer) {
 	return datapleaseresult;
 }
 
-void DK1IMU_Datatosamples(unsigned char * imudat, float * samplevecs) { //accel, gyro, magnet
+void DK1IMU_Datatosamples_DK1(unsigned char * imudat, float * samplevecs) { //accel, gyro, magnet
 	int decodedsamples[9];
 	DK1IMU_Decodesample((unsigned char *)&(imudat[8]), &(decodedsamples[0]));
 	DK1IMU_Decodesample((unsigned char *)&(imudat[16]), &(decodedsamples[3]));
 	decodedsamples[6] = swap_s16(*(signed short *)&(imudat[56]));//Values unusable without endian swap
 	decodedsamples[7] = swap_s16(*(signed short *)&(imudat[58]));
-	//decodedsamples[8] = swap_s16(*(signed short *)&(imudat[60]));	
-	decodedsamples[8] = 0; //This axis is broken on my magnetometer, so it will be broken on every magnetometer
+	decodedsamples[8] = swap_s16(*(signed short *)&(imudat[60]));	
+	//decodedsamples[8] = 0; //This axis is broken on my magnetometer
+
+	DK1IMU_vec_to_vecf(&(decodedsamples[0]), &(samplevecs[0]));
+	DK1IMU_vec_to_vecf(&(decodedsamples[3]), &(samplevecs[3]));
+	DK1IMU_vec_to_vecf(&(decodedsamples[6]), &(samplevecs[6]));
+	return;
+}
+
+void DK1IMU_Datatosamples_DK2(unsigned char * imudat, float * samplevecs) {
+	int decodedsamples[9];
+	for(int i = 0; i < 9; i++) decodedsamples[i] = 0; //i dont feel like figuring out mag
+	DK1IMU_Decodesample((unsigned char *)&(imudat[12]), &(decodedsamples[0]));
+	DK1IMU_Decodesample((unsigned char *)&(imudat[20]), &(decodedsamples[3]));
 
 	DK1IMU_vec_to_vecf(&(decodedsamples[0]), &(samplevecs[0]));
 	DK1IMU_vec_to_vecf(&(decodedsamples[3]), &(samplevecs[3]));
@@ -93,7 +110,12 @@ void DK1IMU_Datatosamples(unsigned char * imudat, float * samplevecs) { //accel,
 	return;
 } 
 
-void DK1IMU_SendKeepalive(void) {
+void DK1IMU_Datatosamples(unsigned char * imudat, float * samplevecs) {
+	if(dk1imu_headsettype == DK1IMU_HEADSETTYPE_DK1) DK1IMU_Datatosamples_DK1(imudat, samplevecs);
+	if(dk1imu_headsettype == DK1IMU_HEADSETTYPE_DK2) DK1IMU_Datatosamples_DK2(imudat, samplevecs);
+}
+
+void DK1IMU_SendKeepalive(void) { //i think necessary on other headset
 	if(!dk1imu_devicehandle) return;
 	unsigned char keepalivedata[6] ATTRIBUTE_ALIGN(32) = {8, 0, 0, 0xFF, 0xFF, 0x00}; //setting keepalive to maximum whatever
 	USB_WriteCtrlMsg(dk1imu_devicehandle, USB_REQTYPE_INTERFACE_SET, USB_REQ_SETREPORT, (3 << 8) | 1, 0, 5, keepalivedata);
