@@ -5,6 +5,7 @@ you will need:
   - IOS58 (Comes with 4.3)
 - one of the following:
   - Oculus Rift DK1
+  - Oculus Rift DK2 (Output untested, tracking support untested, distortion correction incomplete)
 - way to convert wii AV to HDMI
   - Wii2HDMI works well
   - Wii U works but i reccomend using a utility to change the output viewport to 704x480 (I think by default it is around 672x456)
