@@ -4,5 +4,5 @@
 	<coder>lliy</coder>
 	<version>1.0</version>
 	<short_description>Music animation</short_description>
-	<long_description>like the other thing, but vr. press RESET or the - button to recenter. supports rift dk1.</long_description>
+	<long_description>like the other thing, but vr. press RESET or the - button to recenter. supports rift dk1, dk2 untested</long_description>
 </app>
