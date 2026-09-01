@@ -113,7 +113,7 @@ int rframe = 1;
 #define DK1IMU_IMPLEMENTATION
 #include "dk1imu.h"
 
-guVector lensOffsets = {0.25f, 0.0f, 0.0f};
+guVector lensOffsets = {0.22f, 0.0f, 0.0f};
 float realfov = 111.478f; //dk1 sdk examples project with 111.478
 
 int yawresetrequest = 1;
@@ -1335,14 +1335,14 @@ int main(int argc,char **argv) {
 				guMtxTransApply(view, view, 0.034f, 0.0f, 0.0f);
 				//guMtxTransApply(overlayView, overlayView, 0.005f, 0.0f, 0.0f);
 				//perspective[0][2] = -lensOffsets.x;
-				perspective[0][2] = -0.25f;
+				perspective[0][2] = -0.22f;
 				overlayPersp[0][2] = -0.3;
 				break;
 			case 1:
 				guMtxTransApply(view, view, -0.034f, 0.0f, 0.0f);
 				//guMtxTransApply(overlayView, overlayView,-0.005f, 0.0f, 0.0f);
 				//perspective[0][2] = lensOffsets.x;
-				perspective[0][2] = 0.25f;
+				perspective[0][2] = 0.22f;
 				overlayPersp[0][2] = 0.3;
 		}
 
@@ -2620,14 +2620,14 @@ int main(int argc,char **argv) {
 					guMtxTransApply(view, view, 0.034f, 0.0f, 0.0f);
 					//guMtxTransApply(overlayView, overlayView, 0.005f, 0.0f, 0.0f);
 					//perspective[0][2] = -lensOffsets.x;
-					perspective[0][2] = -0.25f;
+					perspective[0][2] = -0.22f;
 					eyetexoffset = 0;
 					break;
 				case 1:
 					guMtxTransApply(view, view, -0.034f, 0.0f, 0.0f);
 					//guMtxTransApply(overlayView, overlayView,-0.005f, 0.0f, 0.0f);
 					//perspective[0][2] = lensOffsets.x;
-					perspective[0][2] = 0.25f;
+					perspective[0][2] = 0.22f;
 			}
 			GX_SetCopyClear(LC_GILLPURPLE, 0x00ffffff);
 			if(comiclear < 2) {
